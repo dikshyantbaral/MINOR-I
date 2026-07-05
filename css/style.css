@@ -1,1 +1,82 @@
-﻿
+﻿*{
+    box-sizing:border-box;
+    margin: 0;
+    padding: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+  font-family: 'Inter', sans-serif;
+  background: white;
+  line-height: 1.5;
+  overflow-x: hidden;        /* prevents horizontal scroll from any overflow on mobile */
+}
+nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 48px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.logo img{
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
+}
+
+.nav-links{
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  gap: 25px;
+  font-weight: 700;
+  font-size: 15px;
+  color: purple;
+margin-left:100px;
+}
+
+.nav-links a{
+  opacity: 0.85;
+  transition: opacity .2s;
+  text-decoration: none;
+  color: black;
+}
+
+.nav-links a:hover{
+  opacity: 1;
+  color: purple;
+}
+.btn-login{
+  padding: 10px 22px;
+  border: 1.5px solid purple;
+  border-radius: 10px;
+  color: linear-gradient(135deg, #6C4FF5, #8B5CF6);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+.nav-actions{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.btn-primary{
+  padding: 12px 24px;
+  border-radius: 10px;
+ background: #5D43D8;
+  color: #fff;
+text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+ 
+.btn-login:hover,
+.btn-primary:hover{
+  opacity: 0.9;
+}
+ 
