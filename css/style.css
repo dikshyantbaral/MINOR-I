@@ -79,4 +79,21 @@ text-decoration: none;
 .btn-primary:hover{
   opacity: 0.9;
 }
- 
+.pragati-text{
+  font-family:'Times New Roman', Times, serif;
+  font-weight: 700;
+  padding-left: 20px;
+  font-size: 75px;
+}
+.pragati-text2{
+  font-family:'Times New Roman', Times, serif;
+  font-weight: 700;
+  padding-left: 20px;
+  font-size: 75px;
+}
+.pragati-text3{
+  font-family:'Times New Roman', Times, serif;
+  font-weight: 700;
+  padding-left: 20px;
+  font-size: 75px;
+}

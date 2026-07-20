@@ -4,23 +4,424 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Home</title>
+    <title>Pragati</title>
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <img src="placeholder.png">
-        </div>
+ 
+<div id="landing-page">
+
+  <nav class="landing-nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo" onclick="return false">
+          <div class="nav-logo-icon"><i data-lucide="book-open" style="width:18px;height:18px"></i></div>
+          Pragati
+        </a>
         <div class="nav-links">
-            <a href="#Features">Features</a>
-            <a href="#Why Pragati?">Why Pragati?</a>
-            <a href="#Testimonials">Testimonials</a>
-            <a href="#faq">FAQ</a>
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#all-features">Why Us</a>
+          <a href="#testimonials">Testimonials</a>
+          <a href="#faq">FAQ</a>
         </div>
         <div class="nav-actions">
-            <a href="login.htm" class="btn-login">Log in </a>
-            <a href="signup.htm" class="btn-primary">Get Started for Free</a>
+          <button class="btn btn-ghost" onclick="showDashboard()">Log in</button>
+          <button class="btn btn-primary" onclick="showDashboard()">Get Started</button>
+          <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Menu">
+            <i data-lucide="menu" style="width:22px;height:22px"></i>
+          </button>
         </div>
-    </nav>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#features" onclick="closeMobileMenu()">Features</a>
+    <a href="#how-it-works" onclick="closeMobileMenu()">How It Works</a>
+    <a href="#all-features" onclick="closeMobileMenu()">Why Us</a>
+    <a href="#testimonials" onclick="closeMobileMenu()">Testimonials</a>
+    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="#" onclick="closeMobileMenu();showDashboard()">Log in</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="fade-in-up">
+          <div class="hero-badge">
+            <span class="badge"><i data-lucide="sparkles" style="width:14px;height:14px"></i> Your Study Companion</span>
+          </div>
+          <h1 class="hero-heading">Master Your Studies with Intelligent Planning</h1>
+          <p class="body-text hero-desc">Organize subjects, track tasks, stay focused with built-in timers, and build consistent study habits — all in one beautifully designed workspace.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="showDashboard()">
+              Start Planning <i data-lucide="arrow-right" style="width:18px;height:18px"></i>
+            </button>
+            <button class="btn btn-secondary" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">
+              See How It Works
+            </button>
+          </div>
+          <div class="hero-social-proof">
+            <div class="social-proof-avatars">
+              <span style="background:#6D4CFF">A</span>
+              <span style="background:#22C55E">M</span>
+              <span style="background:#F59E0B">S</span>
+              <span style="background:#EF4444">K</span>
+            </div>
+            <div class="social-proof-text">
+              <strong>10,000+</strong> students already studying smarter
+            </div>
+          </div>
+        </div>
+        <!-- <div class="fade-in-up delay-2">
+          <div class="hero-preview">
+            <div class="preview-top">
+              <div class="preview-dot"></div>
+              <div class="preview-dot"></div>
+              <div class="preview-dot"></div>
+            </div>
+            <div class="preview-body">
+              <div class="preview-sidebar">
+                <div class="preview-sidebar-dot active"></div>
+                <div class="preview-sidebar-dot"></div>
+                <div class="preview-sidebar-dot"></div>
+                <div class="preview-sidebar-dot"></div>
+                <div class="preview-sidebar-dot"></div>
+                <div class="preview-sidebar-dot"></div>
+              </div>
+              <div class="preview-main">
+                <div class="preview-header-row">
+                  <div class="preview-title-bar"></div>
+                  <div class="preview-avatar-small"></div>
+                </div>
+                <div class="preview-cards">
+                  <div class="preview-card">
+                    <div class="preview-card-bar" style="background:var(--primary);width:60%"></div>
+                    <div class="preview-card-line" style="width:80%"></div>
+                  </div>
+                  <div class="preview-card">
+                    <div class="preview-card-bar" style="background:var(--success);width:45%"></div>
+                    <div class="preview-card-line" style="width:70%"></div>
+                  </div>
+                  <div class="preview-card">
+                    <div class="preview-card-bar" style="background:var(--warning);width:75%"></div>
+                    <div class="preview-card-line" style="width:60%"></div>
+                  </div>
+                </div>
+                <div class="preview-chart-area" id="preview-chart">
+                  <div class="preview-chart-bar" style="height:40%;background:var(--primary-light)"></div>
+                  <div class="preview-chart-bar" style="height:65%;background:var(--primary-light)"></div>
+                  <div class="preview-chart-bar" style="height:45%;background:var(--primary-light)"></div>
+                  <div class="preview-chart-bar" style="height:80%;background:var(--primary)"></div>
+                  <div class="preview-chart-bar" style="height:55%;background:var(--primary-light)"></div>
+                  <div class="preview-chart-bar" style="height:70%;background:var(--primary-light)"></div>
+                  <div class="preview-chart-bar" style="height:90%;background:var(--primary)"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </section>
+
+  <!-- Features (4 cards) -->
+  <section class="section features-section" id="features">
+    <div class="container">
+      <div class="text-center">
+        <p class="label-text" style="color:var(--primary);margin-bottom:16px">Core Features</p>
+        <h2 class="section-heading">Everything You Need to Study Effectively</h2>
+      </div>
+      <div class="features-grid">
+        <div class="card feature-card fade-in-up delay-1">
+          <div class="feature-card-icon"><i data-lucide="layout-grid" style="width:22px;height:22px"></i></div>
+          <h3 class="card-heading">Plan Studies</h3>
+          <p>Organize your subjects, chapters, and topics into a clear, structured study plan that adapts to your schedule.</p>
+        </div>
+        <div class="card feature-card fade-in-up delay-2">
+          <div class="feature-card-icon"><i data-lucide="focus" style="width:22px;height:22px"></i></div>
+          <h3 class="card-heading">Stay Focused</h3>
+          <p>Built-in Pomodoro timer with customizable intervals keeps you in deep focus mode during every study session.</p>
+        </div>
+        <div class="card feature-card fade-in-up delay-3">
+          <div class="feature-card-icon"><i data-lucide="bar-chart-3" style="width:22px;height:22px"></i></div>
+          <h3 class="card-heading">Track Progress</h3>
+          <p>Visual analytics show you exactly where you stand — weekly hours, completion rates, and subject mastery.</p>
+        </div>
+        <div class="card feature-card fade-in-up delay-4">
+          <div class="feature-card-icon"><i data-lucide="flame" style="width:22px;height:22px"></i></div>
+          <h3 class="card-heading">Build Consistency</h3>
+          <p>Habit tracking and streak systems motivate you to show up every day and build lasting study habits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section how-section" id="how-it-works">
+    <div class="container">
+      <p class="label-text" style="color:var(--primary)">How It Works</p>
+      <h2 class="section-heading">Three Steps to Smarter Studying</h2>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-num">1</div>
+          <h3>Connect</h3>
+          <p>Sign up in seconds and set up your subjects. Import your syllabus or create your own structure from scratch.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-num">2</div>
+          <h3>Plan</h3>
+          <p>Break down each subject into tasks, set deadlines, and create a study schedule that fits your life.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-num">3</div>
+          <h3>Track</h3>
+          <p>Use the timer, log sessions, and watch your progress grow with detailed analytics and streak tracking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Features Grid (8 cards) -->
+  <section class="section features-section" id="all-features">
+    <div class="container">
+      <div class="text-center">
+        <p class="label-text" style="color:var(--primary);margin-bottom:16px">Full Feature Set</p>
+        <h2 class="section-heading">Designed for Serious Students</h2>
+      </div>
+      <div class="all-features-grid mt-64">
+        <div class="all-feature-card">
+          <div class="icon-wrap"><i data-lucide="book-open" style="width:20px;height:20px"></i></div>
+          <h4>Subjects</h4>
+          <p>Organize unlimited subjects with color coding, progress tracking, and hour logging.</p>
+        </div>
+        <div class="all-feature-card">
+          <div class="icon-wrap"><i data-lucide="check-square" style="width:20px;height:20px"></i></div>
+          <h4>Tasks</h4>
+          <p>Kanban board with drag-and-drop. Move tasks from todo to doing to completed effortlessly.</p>
+        </div>
+        <div class="all-feature-card">
+          <div class="icon-wrap"><i data-lucide="timer" style="width:20px;height:20px"></i></div>
+          <h4>Pomodoro</h4>
+          <p>Customizable focus timer with short and long breaks. Audio notifications when sessions end.</p>
+        </div>
+        <div class="all-feature-card">
+          <div class="icon-wrap"><i data-lucide="sticky-note" style="width:20px;height:20px"></i></div>
+          <h4>Notes</h4>
+          <p>Organized note-taking with folders, pinning, and full-text search across all your notes.</p>
+        </div>
+        <div class="all-feature-card">
+          <div class="icon-wrap"><i data-lucide="pie-chart" style="width:20px;height:20px"></i></div>
+          <h4>Analytics</h4>
+          <p>Beautiful charts showing weekly, monthly, and per-subject study patterns and progress.</p>
+        </div>
+        <div class="all-feature-card">
+          <div class="icon-wrap"><i data-lucide="calendar" style="width:20px;height:20px"></i></div>
+          <h4>Calendar</h4>
+          <p>See your study schedule at a glance. Plan ahead and never miss a deadline or session.</p>
+        </div>
+        <div class="all-feature-card">
+          <div class="icon-wrap"><i data-lucide="repeat" style="width:20px;height:20px"></i></div>
+          <h4>Habits</h4>
+          <p>Build daily study habits with streak tracking, weekly views, and completion heatmaps.</p>
+        </div>
+        <div class="all-feature-card">
+          <div class="icon-wrap"><i data-lucide="award" style="width:20px;height:20px"></i></div>
+          <h4>Achievements</h4>
+          <p>Unlock milestones as you study. Earn badges for consistency, hours logged, and goals hit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics -->
+  <section class="section stats-section">
+    <div class="container">
+      <div class="text-center">
+        <p class="label-text" style="color:var(--primary);margin-bottom:16px">Trusted by Students</p>
+        <h2 class="section-heading">Numbers That Speak</h2>
+      </div>
+      <div class="stats-grid mt-64">
+        <div class="stat-item">
+          <div class="stat-number">10,000+</div>
+          <p>Active Students</p>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">250,000+</div>
+          <p>Study Sessions Completed</p>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">95%</div>
+          <p>Goal Completion Rate</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="text-center">
+        <p class="label-text" style="color:var(--primary);margin-bottom:16px">Testimonials</p>
+        <h2 class="section-heading">What Students Say</h2>
+      </div>
+      <div class="testimonials-grid mt-64">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+          </div>
+          <p class="testimonial-text">"StudyFlow completely changed how I approach my exams. The Pomodoro timer keeps me focused, and the progress charts show me exactly where I need to improve."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:#6D4CFF">A</div>
+            <div>
+              <div class="testimonial-name">Alex Chen</div>
+              <div class="testimonial-role">Computer Science, MIT</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+          </div>
+          <p class="testimonial-text">"The habit tracker is addictive in the best way. I have not missed a study day in 45 days. The streak system really motivates you to keep going."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:#22C55E">S</div>
+            <div>
+              <div class="testimonial-name">Sarah Mitchell</div>
+              <div class="testimonial-role">Pre-Med, Stanford</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+            <i data-lucide="star" style="width:16px;height:16px;fill:var(--warning)"></i>
+          </div>
+          <p class="testimonial-text">"I have tried every study app out there. StudyFlow is the only one that feels like it was designed by someone who actually studies. Clean, fast, and incredibly useful."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background:#F59E0B">R</div>
+            <div>
+              <div class="testimonial-name">Raj Patel</div>
+              <div class="testimonial-role">Engineering, Georgia Tech</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section" id="faq">
+    <div class="container">
+      <div class="text-center">
+        <p class="label-text" style="color:var(--primary);margin-bottom:16px">FAQ</p>
+        <h2 class="section-heading">Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list mt-64">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Is Pragati free to use?
+            <i data-lucide="chevron-down" style="width:18px;height:18px"></i>
+          </button>
+          <div class="faq-answer"><p>Yes, Pragati is completely free with all core features available to every student. No hidden fees, no premium tiers, no limitations on subjects or tasks.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Does my data stay on my device?
+            <i data-lucide="chevron-down" style="width:18px;height:18px"></i>
+          </button>
+          <div class="faq-answer"><p>Absolutely. All your data is stored locally in your browser using localStorage. Nothing is sent to any server. Your study data stays entirely private.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Can I use it on my phone?
+            <i data-lucide="chevron-down" style="width:18px;height:18px"></i>
+          </button>
+          <div class="faq-answer"><p>Yes. Pragati is fully responsive and works on any device with a modern browser — desktop, tablet, or phone. The interface adapts to your screen size.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            How does the Pomodoro timer work?
+            <i data-lucide="chevron-down" style="width:18px;height:18px"></i>
+          </button>
+          <div class="faq-answer"><p>The timer defaults to 25-minute focus sessions with 5-minute short breaks and 15-minute long breaks every 4 sessions. You can customize all durations in the timer settings.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Can I organize tasks by subject?
+            <i data-lucide="chevron-down" style="width:18px;height:18px"></i>
+          </button>
+          <div class="faq-answer"><p>Yes. Every task can be assigned to a subject, given a priority level, and moved across the kanban board using drag and drop. You can also filter and search tasks.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <h2 class="section-heading">Ready to Study Smarter?</h2>
+        <p class="body-text" style="margin-left:auto;margin-right:auto">Join thousands of students who have transformed their study routine with StudyFlow.</p>
+        <button class="btn btn-primary" onclick="showDashboard()" style="position:relative">
+          Get Started Free <i data-lucide="arrow-right" style="width:18px;height:18px"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="landing-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="nav-logo-icon"><i data-lucide="book-open" style="width:18px;height:18px"></i></div>
+            Pragati
+          </div>
+          <p>The intelligent study planner designed to help students organize, focus, and achieve their academic goals.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#all-features">All Features</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#">Study Tips</a>
+          <a href="#">Blog</a>
+          <a href="#">Guides</a>
+          <a href="#">Community</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>2026 StudyFlow. All rights reserved.</span>
+        <span>Made for students, by a student.</span>
+      </div>
+    </div>
+  </footer>
+</div>
 </body>
 </html>
