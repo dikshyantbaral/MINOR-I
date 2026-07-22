@@ -376,5 +376,149 @@
     </div>
   </footer>
 </div>
+<div id="dashboard-app">
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="nav-logo" style="font-size:16px">
+        <div class="nav-logo-icon" style="width:28px;height:28px;border-radius:8px"><i data-lucide="book-open" style="width:15px;height:15px"></i></div>
+        Pragati
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-label">Main</div>
+      <div class="sidebar-link active" data-page="dashboard" onclick="navigateTo('dashboard')">
+        <i data-lucide="layout-dashboard"></i> Dashboard
+      </div>
+      <div class="sidebar-link" data-page="subjects" onclick="navigateTo('subjects')">
+        <i data-lucide="book-open"></i> Subjects
+      </div>
+      <div class="sidebar-link" data-page="tasks" onclick="navigateTo('tasks')">
+        <i data-lucide="check-square"></i> Tasks
+      </div>
+      <div class="sidebar-link" data-page="timer" onclick="navigateTo('timer')">
+        <i data-lucide="timer"></i> Study Timer
+      </div>
+      <div class="sidebar-nav-label">Other</div>
+      <div class="sidebar-link" data-page="notes" onclick="navigateTo('notes')">
+        <i data-lucide="sticky-note"></i> Notes
+      </div>
+      <div class="sidebar-link" data-page="settings" onclick="navigateTo('settings')">
+        <i data-lucide="settings"></i> Settings
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn btn-ghost w-full flex items-center gap-8" onclick="showLanding()" style="justify-content:flex-start;padding:10px 12px">
+        <i data-lucide="log-out" style="width:18px;height:18px"></i> <span style="font-size:14px;font-weight:500">Back to Home</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Area -->
+  <div class="main-area">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="topbar-btn" onclick="toggleSidebar()" aria-label="Toggle sidebar" style="display:none" id="sidebar-toggle">
+          <i data-lucide="menu" style="width:20px;height:20px"></i>
+        </button>
+        <div class="topbar-greeting">
+          <h2 id="greeting-text">Good morning, Student</h2>
+          <p id="greeting-date"></p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-box topbar-search">
+          <i data-lucide="search" style="width:16px;height:16px;color:var(--text-tertiary);flex-shrink:0"></i>
+          <input type="text" placeholder="Search anything..." id="global-search" oninput="handleGlobalSearch(this.value)">
+        </div>
+        <button class="topbar-btn" onclick="toggleDarkMode()" aria-label="Toggle theme">
+          <i data-lucide="sun" style="width:20px;height:20px" id="theme-icon-sun"></i>
+          <i data-lucide="moon" style="width:20px;height:20px;display:none" id="theme-icon-moon"></i>
+        </button>
+        <button class="topbar-btn" onclick="showNotifications()" aria-label="Notifications">
+          <i data-lucide="bell" style="width:20px;height:20px"></i>
+          <span class="notif-dot"></span>
+        </button>
+        <div class="dropdown">
+          <div class="topbar-profile" onclick="toggleDropdown('profile-dropdown')">
+            <div class="topbar-avatar">S</div>
+            <span class="topbar-profile-name">Student</span>
+            <i data-lucide="chevron-down" style="width:14px;height:14px;color:var(--text-tertiary)"></i>
+          </div>
+          <div class="dropdown-menu" id="profile-dropdown">
+            <div class="dropdown-item" onclick="navigateTo('settings');closeAllDropdowns()"><i data-lucide="user" style="width:16px;height:16px"></i> Profile</div>
+            <div class="dropdown-item" onclick="navigateTo('settings');closeAllDropdowns()"><i data-lucide="settings" style="width:16px;height:16px"></i> Settings</div>
+            <div class="dropdown-item" onclick="showLanding();closeAllDropdowns()"><i data-lucide="log-out" style="width:16px;height:16px"></i> Log out</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="page-content dashboard-page active" id="page-dashboard">
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon" style="background:var(--primary-light);color:var(--primary)"><i data-lucide="clock" style="width:20px;height:20px"></i></div>
+            <span class="stat-card-change up"><i data-lucide="trending-up" style="width:14px;height:14px"></i> 12%</span>
+          </div>
+          <div class="stat-card-value" id="dash-study-time">24.5h</div>
+          <div class="stat-card-label">Study Time This Week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon" style="background:var(--success-light);color:var(--success)"><i data-lucide="check-circle" style="width:20px;height:20px"></i></div>
+            <span class="stat-card-change up"><i data-lucide="trending-up" style="width:14px;height:14px"></i> 8%</span>
+          </div>
+          <div class="stat-card-value" id="dash-completed">18</div>
+          <div class="stat-card-label">Completed Tasks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon" style="background:var(--warning-light);color:var(--warning)"><i data-lucide="flame" style="width:20px;height:20px"></i></div>
+            <span class="stat-card-change up"><i data-lucide="trending-up" style="width:14px;height:14px"></i> 3 days</span>
+          </div>
+          <div class="stat-card-value" id="dash-streak">12</div>
+          <div class="stat-card-label">Current Streak</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon" style="background:var(--danger-light);color:var(--danger)"><i data-lucide="book-open" style="width:20px;height:20px"></i></div>
+          </div>
+          <div class="stat-card-value" id="dash-subjects">5</div>
+          <div class="stat-card-label">Active Subjects</div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <h3>Weekly Study Time</h3>
+            <span class="small-text">Hours</span>
+          </div>
+          <div class="chart-canvas-wrap"><canvas id="chart-weekly" height="220"></canvas></div>
+        </div>
+        
+
+      <div class="dashboard-grid">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <h3>Today's Goals</h3>
+            <span class="small-text" id="goals-count">2/4 done</span>
+          </div>
+          <div class="goals-list" id="goals-list"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <h3>Recent Activity</h3> 
+           </div>
+          <div class="activity-list" id="activity-list">
+            
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 </html>
