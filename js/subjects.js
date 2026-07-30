@@ -1,0 +1,5 @@
+/* Subjects Page */
+
+function renderSubjects(){
+    
+}
