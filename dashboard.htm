@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pragati Workspace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+<div id="dashboard-app" style="display:block">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="nav-logo" style="font-size:18px">
+        <div class="nav-logo-icon" style="width:30px;height:30px;border-radius:8px"><i data-lucide="book-open" style="width:16px;height:16px"></i></div>
+        Pragati
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-label">Overview</div>
+      <div class="sidebar-link active" data-page="dashboard" onclick="navigateTo('dashboard')"><i data-lucide="layout-dashboard"></i> Dashboard</div>
+      <div class="sidebar-link" data-page="subjects" onclick="navigateTo('subjects')"><i data-lucide="book-open"></i> Subjects</div>
+      <div class="sidebar-link" data-page="tasks" onclick="navigateTo('tasks')"><i data-lucide="check-square"></i> Tasks</div>
+      <div class="sidebar-link" data-page="timer" onclick="navigateTo('timer')"><i data-lucide="timer"></i> Study Timer</div>
+      <div class="sidebar-nav-label">Workspace</div>
+      <div class="sidebar-link" data-page="notes" onclick="navigateTo('notes')"><i data-lucide="sticky-note"></i> Notes</div>
+      <div class="sidebar-link" data-page="settings" onclick="navigateTo('settings')"><i data-lucide="settings"></i> Settings</div>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="btn btn-ghost w-full flex items-center gap-8" onclick="handleLogout()" style="justify-content:flex-start">
+        <i data-lucide="log-out" style="width:18px;height:18px;color:var(--danger)"></i> Log Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Area -->
+  <div class="main-area">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="topbar-greeting">
+          <h2 id="greeting-text">Welcome back</h2>
+          <p id="greeting-date"></p>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="topbar-btn" onclick="toggleDarkMode()" title="Toggle Theme">
+          <i data-lucide="sun" style="width:20px;height:20px" id="theme-icon-sun"></i>
+          <i data-lucide="moon" style="width:20px;height:20px;display:none" id="theme-icon-moon"></i>
+        </button>
+        <div class="dropdown">
+          <div class="topbar-profile" onclick="this.nextElementSibling.classList.toggle('open')">
+            <div class="topbar-avatar" id="topbar-avatar-initials">U</div>
+            <span style="font-size:14px;font-weight:600" id="topbar-user-name">User</span>
+            <i data-lucide="chevron-down" style="width:14px;height:14px;color:var(--text-tertiary)"></i>
+          </div>
+          <div class="dropdown-menu" id="profile-dropdown">
+            <div style="padding:10px 12px;border-bottom:1px solid var(--border-light)">
+              <div style="font-size:13px;font-weight:600" id="dropdown-user-name">User Name</div>
+              <div style="font-size:12px;color:var(--text-tertiary)" id="dropdown-user-email">user@example.com</div>
+            </div>
+            <div class="dropdown-item" onclick="navigateTo('settings');this.parentElement.classList.remove('open')"><i data-lucide="settings" style="width:16px;height:16px"></i> Account Settings</div>
+            <div class="dropdown-item" onclick="handleLogout();this.parentElement.classList.remove('open')" style="color:var(--danger)"><i data-lucide="log-out" style="width:16px;height:16px"></i> Log Out</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- PAGE: DASHBOARD -->
+    <div class="page-content dashboard-page active" id="page-dashboard">
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon" style="background:var(--primary-light);color:var(--primary)"><i data-lucide="clock" style="width:20px;height:20px"></i></div>
+          </div>
+          <div class="stat-number" id="dash-study-time">0h</div>
+          <div class="small-text">Total Study Hours</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon" style="background:var(--success-light);color:var(--success)"><i data-lucide="check-circle" style="width:20px;height:20px"></i></div>
+          </div>
+          <div class="stat-number" id="dash-completed">0</div>
+          <div class="small-text">Tasks Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon" style="background:var(--danger-light);color:var(--danger)"><i data-lucide="book-open" style="width:20px;height:20px"></i></div>
+          </div>
+          <div class="stat-number" id="dash-subjects">0</div>
+          <div class="small-text">Active Subjects</div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="chart-card">
+          <div class="chart-card-header"><h3>Subject Progress Overview</h3></div>
+          <div class="chart-canvas-wrap"><canvas id="chart-subjects" height="220"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-header"><h3>Active Tasks</h3></div>
+          <div id="dash-task-list" style="display:flex;flex-direction:column;gap:10px"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: SUBJECTS -->
+    <div class="page-content dashboard-page" id="page-subjects">
+      <div class="page-header">
+        <h1>Subjects</h1>
+        <button class="btn btn-primary btn-sm" onclick="openModal('subject-modal')"><i data-lucide="plus" style="width:16px;height:16px"></i> Add Subject</button>
+      </div>
+      <div id="subjects-container" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:20px"></div>
+    </div>
+
+    <!-- PAGE: TASKS -->
+    <div class="page-content dashboard-page" id="page-tasks">
+      <div class="page-header">
+        <h1>Tasks Kanban</h1>
+        <button class="btn btn-primary btn-sm" onclick="openModal('task-modal')"><i data-lucide="plus" style="width:16px;height:16px"></i> Add Task</button>
+      </div>
+      <div class="kanban">
+        <div class="kanban-column">
+          <h3>To Do (<span id="count-todo">0</span>)</h3>
+          <div class="kanban-cards" id="kanban-todo"></div>
+        </div>
+        <div class="kanban-column">
+          <h3>In Progress (<span id="count-doing">0</span>)</h3>
+          <div class="kanban-cards" id="kanban-doing"></div>
+        </div>
+        <div class="kanban-column">
+          <h3>Completed (<span id="count-completed">0</span>)</h3>
+          <div class="kanban-cards" id="kanban-completed"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: TIMER -->
+    <div class="page-content dashboard-page" id="page-timer">
+      <div class="page-header"><h1>Focus Timer</h1></div>
+      <div class="timer-layout">
+        <div class="timer-main">
+          <div class="timer-modes">
+            <button class="timer-mode-btn active" data-mode="focus" onclick="setTimerMode('focus')">Focus Mode</button>
+            <button class="timer-mode-btn" data-mode="short" onclick="setTimerMode('short')">Break Mode</button>
+          </div>
+
+          <!-- Custom Time Input Controls -->
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:32px;background:var(--bg-secondary);padding:10px 18px;border-radius:var(--radius-sm);border:1px solid var(--border)">
+            <label style="font-size:13px;font-weight:600;color:var(--text-secondary)">Set Time (mins):</label>
+            <button class="btn btn-secondary btn-sm" onclick="adjustTimerMinutes(-5)" style="padding:4px 10px;font-weight:700">-5m</button>
+            <input type="number" id="timer-custom-minutes" value="25" min="1" max="180" style="width:70px;text-align:center;padding:6px 8px;font-weight:700" onchange="setCustomTimerMinutes(this.value)">
+            <button class="btn btn-secondary btn-sm" onclick="adjustTimerMinutes(5)" style="padding:4px 10px;font-weight:700">+5m</button>
+          </div>
+
+          <div class="timer-circle-wrap">
+            <svg width="280" height="280" viewBox="0 0 280 280">
+              <circle class="timer-circle-bg" cx="140" cy="140" r="124"></circle>
+              <circle class="timer-circle-progress" id="timer-progress" cx="140" cy="140" r="124" stroke-dasharray="779.2" stroke-dashoffset="0"></circle>
+            </svg>
+            <div class="timer-display">
+              <div class="timer-time" id="timer-time">25:00</div>
+              <div class="small-text" id="timer-mode-label">Focus Session</div>
+            </div>
+          </div>
+          <div class="flex gap-16">
+            <button class="btn btn-secondary btn-icon" onclick="resetTimer()"><i data-lucide="rotate-ccw" style="width:20px;height:20px"></i></button>
+            <button class="btn btn-primary" id="timer-play-btn" onclick="toggleTimer()" style="padding:14px 40px"><span id="timer-play-text">Start</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: NOTES -->
+    <div class="page-content dashboard-page" id="page-notes">
+      <div class="page-header">
+        <h1>Study Notes</h1>
+        <button class="btn btn-primary btn-sm" onclick="createNewNote()"><i data-lucide="plus" style="width:16px;height:16px"></i> New Note</button>
+      </div>
+      <div class="notes-layout">
+        <div id="notes-list" style="display:flex;flex-direction:column;gap:10px"></div>
+        <div class="note-editor" id="note-editor">
+          <input type="text" id="note-editor-title" placeholder="Note Title..." oninput="autoSaveNote()">
+          <textarea id="note-editor-content" placeholder="Type your note content here..." oninput="autoSaveNote()"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE: SETTINGS -->
+    <div class="page-content dashboard-page" id="page-settings">
+      <div class="page-header"><h1>Account Settings</h1></div>
+      <div class="settings-grid">
+        <div class="chart-card">
+          <h3>User Profile</h3>
+          <div style="margin-top:20px" class="flex flex-col gap-16">
+            <div class="input-group">
+              <label>Full Name</label>
+              <input type="text" id="settings-name">
+            </div>
+            <div class="input-group">
+              <label>Email Address</label>
+              <input type="email" id="settings-email" disabled style="opacity:0.7;cursor:not-allowed">
+            </div>
+            <button class="btn btn-primary" onclick="saveProfileSettings()">Save Profile</button>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>JSON Storage & Backup</h3>
+          <p class="body-text" style="font-size:14px;margin-top:10px">Export your account data as a JSON file backup, or manage your stored credentials.</p>
+          <div style="margin-top:20px" class="flex gap-16">
+            <button class="btn btn-secondary btn-sm" onclick="exportUserJSON()"><i data-lucide="download" style="width:16px;height:16px"></i> Export JSON Data</button>
+            <button class="btn btn-danger btn-sm" onclick="handleLogout()"><i data-lucide="log-out" style="width:16px;height:16px"></i> Log Out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modals -->
+<div class="modal-overlay" id="subject-modal">
+  <div class="modal">
+    <div class="modal-header"><h3>Add Subject</h3><button class="btn btn-ghost btn-icon" onclick="closeModal('subject-modal')"><i data-lucide="x" style="width:20px;height:20px"></i></button></div>
+    <div class="input-group"><label>Subject Name</label><input type="text" id="subject-name-input" placeholder="e.g. Physics"></div>
+    <button class="btn btn-primary w-full" style="margin-top:20px" onclick="addSubject()">Save Subject</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="task-modal">
+  <div class="modal">
+    <div class="modal-header"><h3>Add Task</h3><button class="btn btn-ghost btn-icon" onclick="closeModal('task-modal')"><i data-lucide="x" style="width:20px;height:20px"></i></button></div>
+    <div class="input-group"><label>Task Title</label><input type="text" id="task-title-input" placeholder="e.g. Read Chapter 4"></div>
+    <button class="btn btn-primary w-full" style="margin-top:20px" onclick="addTask()">Save Task</button>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- Scripts -->
+<script src="js/storage.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/subjects.js"></script>
+<script src="js/tasks.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/notes.js"></script>
+<script src="js/settings.js"></script>
+<script>
+  function navigateTo(page) {
+    $$('.dashboard-page').forEach(p => p.classList.remove('active'));
+    $$('.sidebar-link').forEach(l => l.classList.remove('active'));
+    const target = $('#page-' + page);
+    if (target) target.classList.add('active');
+    const link = $(`.sidebar-link[data-page="${page}"]`);
+    if (link) link.classList.add('active');
+
+    if (page === 'dashboard') renderDashboard();
+    if (page === 'subjects') renderSubjects();
+    if (page === 'tasks') renderTasks();
+    if (page === 'timer') initTimerOnPageLoad();
+    if (page === 'notes') renderNotes();
+    lucide.createIcons();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons();
+    checkSessionOnPageLoad(true);
+    navigateTo('dashboard');
+  });
+</script>
+</body>
+</html>
