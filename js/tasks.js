@@ -1,13 +1,17 @@
-/* 
-   TASKS
-   */
+/*
+   TASKS KANBAN MODULE
+    */
+
+let activeKanbanTab = 'todo';
 
 function renderTasks() {
   ['todo', 'doing', 'completed'].forEach(status => {
     const list = userData.tasks.filter(t => t.status === status);
     const countEl = $(`#count-${status}`);
+    const tabCountEl = $(`#count-${status}-tab`);
     const colEl = $(`#kanban-${status}`);
     if (countEl) countEl.textContent = list.length;
+    if (tabCountEl) tabCountEl.textContent = list.length;
     if (colEl) {
       colEl.innerHTML = list.map(t => `
         <div class="task-card">
@@ -24,7 +28,18 @@ function renderTasks() {
       `).join('');
     }
   });
+  switchKanbanTab(activeKanbanTab);
   lucide.createIcons();
+}
+
+function switchKanbanTab(status) {
+  activeKanbanTab = status;
+  $$('.kanban-tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === status);
+  });
+  $$('.kanban-column').forEach(col => {
+    col.classList.toggle('active-mobile', col.id === 'col-' + status);
+  });
 }
 
 function addTask() {

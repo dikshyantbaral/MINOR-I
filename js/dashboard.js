@@ -2,6 +2,20 @@
    DASHBOARD OVERVIEW MODULE
    */
 
+function toggleSidebar() {
+  const sidebar = $('#sidebar');
+  const overlay = $('#sidebar-overlay');
+  if (sidebar) sidebar.classList.toggle('open');
+  if (overlay) overlay.classList.toggle('open');
+}
+
+function closeSidebar() {
+  const sidebar = $('#sidebar');
+  const overlay = $('#sidebar-overlay');
+  if (sidebar) sidebar.classList.remove('open');
+  if (overlay) overlay.classList.remove('open');
+}
+
 function renderDashboard() {
   const subCount = $('#dash-subjects');
   const compCount = $('#dash-completed');
@@ -32,15 +46,16 @@ function drawSubjectChart() {
   const ctx = canvas.getContext('2d');
   const dpr = window.devicePixelRatio || 1;
   const rect = canvas.parentElement.getBoundingClientRect();
+  if (rect.width === 0) return;
   canvas.width = rect.width * dpr; canvas.height = 220 * dpr;
   ctx.scale(dpr, dpr);
   ctx.clearRect(0, 0, rect.width, 220);
 
-  if (!userData.subjects.length) return;
+  if (!userData.subjects || !userData.subjects.length) return;
 
-  const barWidth = Math.min(40, (rect.width - 60) / userData.subjects.length);
+  const barWidth = Math.min(40, Math.max(16, (rect.width - 60) / userData.subjects.length));
   userData.subjects.forEach((s, i) => {
-    const x = 40 + i * (barWidth + 20);
+    const x = 30 + i * (barWidth + 15);
     const h = (s.progress / 100) * 140;
     const y = 180 - h;
 
@@ -52,3 +67,11 @@ function drawSubjectChart() {
     ctx.fillText(s.name.substring(0, 8), x, 200);
   });
 }
+
+window.addEventListener('resize', () => {
+  const pageDash = $('#page-dashboard');
+  if (pageDash && pageDash.classList.contains('active')) {
+    drawSubjectChart();
+  }
+});
+
