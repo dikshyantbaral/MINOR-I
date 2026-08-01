@@ -3,15 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pragati Workspace</title>
+<title>Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/styles.css">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
 
 <div id="dashboard-app" style="display:block">
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
@@ -19,6 +22,7 @@
         <div class="nav-logo-icon" style="width:30px;height:30px;border-radius:8px"><i data-lucide="book-open" style="width:16px;height:16px"></i></div>
         Pragati
       </div>
+      <button class="sidebar-close-btn" onclick="toggleSidebar()" aria-label="Close Sidebar"><i data-lucide="x" style="width:20px;height:20px"></i></button>
     </div>
     <nav class="sidebar-nav">
       <div class="sidebar-nav-label">Overview</div>
@@ -42,6 +46,9 @@
     <!-- Topbar -->
     <header class="topbar">
       <div class="topbar-left">
+        <button class="topbar-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">
+          <i data-lucide="menu" style="width:20px;height:20px"></i>
+        </button>
         <div class="topbar-greeting">
           <h2 id="greeting-text">Welcome back</h2>
           <p id="greeting-date"></p>
@@ -123,16 +130,24 @@
         <h1>Tasks Kanban</h1>
         <button class="btn btn-primary btn-sm" onclick="openModal('task-modal')"><i data-lucide="plus" style="width:16px;height:16px"></i> Add Task</button>
       </div>
+
+      <!-- Mobile Kanban Tabs -->
+      <div class="mobile-kanban-tabs" id="mobile-kanban-tabs">
+        <button class="kanban-tab-btn active" data-tab="todo" onclick="switchKanbanTab('todo')">To Do (<span id="count-todo-tab">0</span>)</button>
+        <button class="kanban-tab-btn" data-tab="doing" onclick="switchKanbanTab('doing')">In Progress (<span id="count-doing-tab">0</span>)</button>
+        <button class="kanban-tab-btn" data-tab="completed" onclick="switchKanbanTab('completed')">Completed (<span id="count-completed-tab">0</span>)</button>
+      </div>
+
       <div class="kanban">
-        <div class="kanban-column">
+        <div class="kanban-column" id="col-todo">
           <h3>To Do (<span id="count-todo">0</span>)</h3>
           <div class="kanban-cards" id="kanban-todo"></div>
         </div>
-        <div class="kanban-column">
+        <div class="kanban-column" id="col-doing">
           <h3>In Progress (<span id="count-doing">0</span>)</h3>
           <div class="kanban-cards" id="kanban-doing"></div>
         </div>
-        <div class="kanban-column">
+        <div class="kanban-column" id="col-completed">
           <h3>Completed (<span id="count-completed">0</span>)</h3>
           <div class="kanban-cards" id="kanban-completed"></div>
         </div>
@@ -150,11 +165,13 @@
           </div>
 
           <!-- Custom Time Input Controls -->
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:32px;background:var(--bg-secondary);padding:10px 18px;border-radius:var(--radius-sm);border:1px solid var(--border)">
-            <label style="font-size:13px;font-weight:600;color:var(--text-secondary)">Set Time (mins):</label>
-            <button class="btn btn-secondary btn-sm" onclick="adjustTimerMinutes(-5)" style="padding:4px 10px;font-weight:700">-5m</button>
-            <input type="number" id="timer-custom-minutes" value="25" min="1" max="180" style="width:70px;text-align:center;padding:6px 8px;font-weight:700" onchange="setCustomTimerMinutes(this.value)">
-            <button class="btn btn-secondary btn-sm" onclick="adjustTimerMinutes(5)" style="padding:4px 10px;font-weight:700">+5m</button>
+          <div class="timer-custom-bar">
+            <label style="font-size:13px;font-weight:600;color:var(--text-secondary);white-space:nowrap">Set Time (mins):</label>
+            <div style="display:flex;align-items:center;gap:6px">
+              <button class="btn btn-secondary btn-sm" onclick="adjustTimerMinutes(-5)" style="padding:4px 10px;font-weight:700">-5m</button>
+              <input type="number" id="timer-custom-minutes" value="25" min="1" max="180" style="width:65px;text-align:center;padding:6px 8px;font-weight:700" onchange="setCustomTimerMinutes(this.value)">
+              <button class="btn btn-secondary btn-sm" onclick="adjustTimerMinutes(5)" style="padding:4px 10px;font-weight:700">+5m</button>
+            </div>
           </div>
 
           <div class="timer-circle-wrap">
@@ -181,9 +198,12 @@
         <h1>Study Notes</h1>
         <button class="btn btn-primary btn-sm" onclick="createNewNote()"><i data-lucide="plus" style="width:16px;height:16px"></i> New Note</button>
       </div>
-      <div class="notes-layout">
+      <div class="notes-layout" id="notes-layout">
         <div id="notes-list" style="display:flex;flex-direction:column;gap:10px"></div>
         <div class="note-editor" id="note-editor">
+          <div class="note-editor-mobile-bar">
+            <button class="btn btn-secondary btn-sm" onclick="closeNoteEditor()"><i data-lucide="arrow-left" style="width:16px;height:16px"></i> Back to Notes List</button>
+          </div>
           <input type="text" id="note-editor-title" placeholder="Note Title..." oninput="autoSaveNote()">
           <textarea id="note-editor-content" placeholder="Type your note content here..." oninput="autoSaveNote()"></textarea>
         </div>
@@ -223,7 +243,7 @@
 </div>
 
 <!-- Modals -->
-<div class="modal-overlay" id="subject-modal">
+<div class="modal-overlay" id="subject-modal" onclick="if(event.target===this) closeModal('subject-modal')">
   <div class="modal">
     <div class="modal-header"><h3>Add Subject</h3><button class="btn btn-ghost btn-icon" onclick="closeModal('subject-modal')"><i data-lucide="x" style="width:20px;height:20px"></i></button></div>
     <div class="input-group"><label>Subject Name</label><input type="text" id="subject-name-input" placeholder="e.g. Physics"></div>
@@ -231,7 +251,7 @@
   </div>
 </div>
 
-<div class="modal-overlay" id="task-modal">
+<div class="modal-overlay" id="task-modal" onclick="if(event.target===this) closeModal('task-modal')">
   <div class="modal">
     <div class="modal-header"><h3>Add Task</h3><button class="btn btn-ghost btn-icon" onclick="closeModal('task-modal')"><i data-lucide="x" style="width:20px;height:20px"></i></button></div>
     <div class="input-group"><label>Task Title</label><input type="text" id="task-title-input" placeholder="e.g. Read Chapter 4"></div>
@@ -266,6 +286,8 @@
     if (page === 'timer') initTimerOnPageLoad();
     if (page === 'notes') renderNotes();
     lucide.createIcons();
+
+    if (typeof closeSidebar === 'function') closeSidebar();
   }
 
   document.addEventListener('DOMContentLoaded', () => {

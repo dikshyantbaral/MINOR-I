@@ -1,6 +1,6 @@
 ﻿/* 
-    CSS Variables & Theme 
-    */
+   1. CSS Variables & Theme Tokens
+   */
 :root {
   --bg-primary: #FAFAFC;
   --bg-secondary: #FFFFFF;
@@ -57,9 +57,9 @@
   --shadow-lg: 0 20px 60px rgba(0,0,0,.4);
 }
 
-/* ================================
+/* 
    2. Reset & Base
-   ================================ */
+   */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body {
@@ -88,9 +88,9 @@ img { max-width: 100%; height: auto; display: block; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-/* ================================
+/* 
    3. Typography & Layout
-   ================================ */
+    */
 .hero-heading { font-size: 64px; font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; }
 .section-heading { font-size: 40px; font-weight: 700; line-height: 1.18; letter-spacing: -0.02em; }
 .card-heading { font-size: 18px; font-weight: 600; line-height: 1.4; }
@@ -113,9 +113,9 @@ img { max-width: 100%; height: auto; display: block; }
 .w-full { width: 100%; }
 .relative { position: relative; }
 
-/* ================================
+/* 
    4. Component UI
-   ================================ */
+    */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   padding: 12px 24px; border-radius: var(--radius-btn); font-size: 15px; font-weight: 600;
@@ -226,9 +226,9 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .dropdown-item:hover { background: var(--bg-hover); color: var(--text-primary); }
 
-/* ================================
+/* 
    5. Landing Page Styles
-   ================================ */
+    */
 .landing-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: rgba(250,250,252,.85); backdrop-filter: blur(12px);
@@ -298,9 +298,9 @@ img { max-width: 100%; height: auto; display: block; }
 .landing-footer { border-top: 1px solid var(--border); padding: 64px 0 48px; background: var(--bg-secondary); }
 .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 32px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-tertiary); }
 
-/* ================================
+/*
    6. Dashboard Layout Styles
-   ================================ */
+    */
 .dashboard-layout { display: flex; min-height: 100vh; position: relative; }
 
 .sidebar-overlay {
@@ -395,6 +395,11 @@ img { max-width: 100%; height: auto; display: block; }
 .timer-modes { display: flex; gap: 8px; margin-bottom: 28px; }
 .timer-mode-btn { padding: 10px 20px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; color: var(--text-secondary); }
 .timer-mode-btn.active { background: var(--primary); color: #fff; font-weight: 600; }
+.timer-custom-bar {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 32px;
+  background: var(--bg-secondary); padding: 10px 18px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); flex-wrap: wrap; justify-content: center;
+}
 .timer-circle-wrap { position: relative; width: 280px; height: 280px; margin-bottom: 32px; max-width: 90vw; }
 .timer-circle-bg { fill: none; stroke: var(--border-light); stroke-width: 8; }
 .timer-circle-progress { fill: none; stroke: var(--primary); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1000ms linear; transform: rotate(-90deg); transform-origin: center; }
@@ -406,13 +411,27 @@ img { max-width: 100%; height: auto; display: block; }
 .note-editor { display: none; }
 .note-editor.active { display: flex; flex-direction: column; gap: 16px; }
 .note-editor input { font-size: 24px; font-weight: 700; border: none; background: transparent; padding: 0; }
+.note-editor-mobile-bar { display: none; margin-bottom: 12px; }
 
 /* Settings */
 .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 
-/* ================================
+/* Mobile Kanban Tabs */
+.mobile-kanban-tabs {
+  display: none; gap: 8px; background: var(--bg-secondary);
+  padding: 6px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  margin-bottom: 20px;
+}
+.kanban-tab-btn {
+  flex: 1; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  color: var(--text-secondary); background: transparent; transition: all var(--transition);
+  text-align: center;
+}
+.kanban-tab-btn.active { background: var(--primary); color: #fff; box-shadow: var(--shadow-sm); }
+
+/* 
    7. Comprehensive Responsive Breakpoints
-   ================================ */
+    */
 
 /* Laptop / Desktop (<= 1200px) */
 @media (max-width: 1200px) {
@@ -453,8 +472,19 @@ img { max-width: 100%; height: auto; display: block; }
   .mobile-menu-toggle { display: flex; }
 
   .stat-cards { grid-template-columns: repeat(2, 1fr); }
-  .kanban { grid-template-columns: 1fr; }
-  .notes-layout { grid-template-columns: 1fr; }
+  
+  /* Mobile Tab Column Filtering */
+  .mobile-kanban-tabs { display: flex; }
+  .kanban { grid-template-columns: 1fr; min-height: auto; }
+  .kanban-column { display: none; }
+  .kanban-column.active-mobile { display: block; }
+
+  /* Mobile Notes View Switcher (List vs Editor) */
+  .notes-layout { grid-template-columns: 1fr; min-height: auto; }
+  .notes-layout.mobile-editing #notes-list { display: none !important; }
+  .notes-layout.mobile-editing .note-editor { display: flex !important; }
+  .notes-layout:not(.mobile-editing) .note-editor { display: none !important; }
+  .note-editor-mobile-bar { display: flex; }
 
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
 }
@@ -478,4 +508,29 @@ img { max-width: 100%; height: auto; display: block; }
   .modal { padding: 20px; border-radius: 16px; }
   .toast-container { right: 16px; left: 16px; top: 16px; }
   .toast { min-width: auto; width: 100%; }
+}
+
+/* Small Mobile Devices (<= 480px) */
+@media (max-width: 480px) {
+  .page-content { padding: 16px 12px; }
+  .page-header { margin-bottom: 20px; gap: 12px; }
+  .page-header h1 { font-size: 22px; }
+  .stat-card { padding: 16px; }
+  .stat-number { font-size: 32px; }
+
+  .topbar { padding: 0 12px; height: 60px; }
+  .topbar-greeting h2 { font-size: 15px; }
+
+  .timer-circle-wrap { width: 200px; height: 200px; }
+  .timer-circle-wrap svg { width: 200px; height: 200px; }
+  .timer-circle-bg, .timer-circle-progress { r: 84; cx: 100; cy: 100; }
+  .timer-time { font-size: 36px; }
+
+  .hero-buttons { width: 100%; }
+  .hero-buttons .btn { width: 100%; justify-content: center; }
+  .preview-main { padding: 12px; }
+  .preview-cards { grid-template-columns: 1fr; }
+
+  .auth-tabs { font-size: 13px; }
+  .btn { padding: 10px 18px; font-size: 14px; }
 }
