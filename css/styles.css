@@ -1,6 +1,6 @@
 ﻿/* 
    1. CSS Variables & Theme Tokens
-   */
+    */
 :root {
   --bg-primary: #FAFAFC;
   --bg-secondary: #FFFFFF;
@@ -57,9 +57,9 @@
   --shadow-lg: 0 20px 60px rgba(0, 0, 0, .4);
 }
 
-/* 
+/* ================================
    2. Reset & Base
-   */
+   ================================ */
 *,
 *::before,
 *::after {
@@ -70,7 +70,7 @@
 
 html {
   scroll-behavior: smooth;
-  
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -148,9 +148,9 @@ img {
   border-radius: 3px;
 }
 
-/* 
+/* ================================
    3. Typography & Layout
-    */
+   ================================ */
 .hero-heading {
   font-size: 64px;
   font-weight: 800;
@@ -253,9 +253,9 @@ img {
   position: relative;
 }
 
-/* 
+/* ================================
    4. Component UI
-    */
+   ================================ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -607,9 +607,9 @@ img {
   color: var(--text-primary);
 }
 
-/* 
+/* ================================
    5. Landing Page Styles
-    */
+   ================================ */
 .landing-nav {
   position: fixed;
   top: 0;
@@ -684,6 +684,20 @@ img {
 
 .mobile-menu-toggle:hover {
   background: var(--bg-hover);
+}
+
+.mobile-drawer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .4);
+  z-index: 98;
+  backdrop-filter: blur(3px);
+  transition: opacity var(--transition);
+}
+
+.mobile-drawer-overlay.open {
+  display: block;
 }
 
 .mobile-menu-drawer {
@@ -875,6 +889,14 @@ img {
   text-align: left;
 }
 
+.faq-question i {
+  transition: transform var(--transition);
+}
+
+.faq-item.open .faq-question i {
+  transform: rotate(180deg);
+}
+
 .faq-answer {
   max-height: 0;
   overflow: hidden;
@@ -902,9 +924,9 @@ img {
   color: var(--text-tertiary);
 }
 
-/*
+/* ================================
    6. Dashboard Layout Styles
-    */
+   ================================ */
 .dashboard-layout {
   display: flex;
   min-height: 100vh;
@@ -1383,9 +1405,9 @@ img {
   box-shadow: var(--shadow-sm);
 }
 
-/* 
+/* ================================
    7. Comprehensive Responsive Breakpoints
-    */
+   ================================ */
 
 /* Laptop / Desktop (<= 1200px) */
 @media (max-width: 1200px) {
@@ -1469,12 +1491,19 @@ img {
   }
 
   .hero {
-    padding-top: 120px;
-    padding-bottom: 60px;
+    padding-top: 110px;
+    padding-bottom: 50px;
   }
 
   .hero-heading {
-    font-size: 40px;
+    font-size: 38px;
+    line-height: 1.15;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    margin-top: 14px;
+    margin-bottom: 24px;
   }
 
   .section-heading {
@@ -1490,11 +1519,31 @@ img {
     display: flex;
   }
 
+  .landing-login-btn,
+  .landing-signup-btn {
+    display: none;
+  }
+
+  .hero-preview {
+    transform: none !important;
+    max-width: 100%;
+  }
+
+  .preview-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+
   .stat-cards {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Mobile Tab Column Filtering */
+  /* Mobile Kanban Tab Column Filtering */
   .mobile-kanban-tabs {
     display: flex;
   }
@@ -1607,6 +1656,33 @@ img {
 
 /* Small Mobile Devices (<= 480px) */
 @media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .hero {
+    padding-top: 96px;
+    padding-bottom: 36px;
+  }
+
+  .hero-heading {
+    font-size: 28px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-desc {
+    font-size: 14px;
+  }
+
+  .hero-badge .badge {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  .section-heading {
+    font-size: 22px;
+  }
+
   .page-content {
     padding: 16px 12px;
   }
@@ -1660,6 +1736,8 @@ img {
 
   .hero-buttons {
     width: 100%;
+    gap: 10px;
+    margin-bottom: 24px;
   }
 
   .hero-buttons .btn {
@@ -1667,12 +1745,31 @@ img {
     justify-content: center;
   }
 
+  .preview-body {
+    min-height: 240px;
+  }
+
+  .preview-sidebar {
+    width: 42px;
+    padding: 12px 6px;
+  }
+
   .preview-main {
-    padding: 12px;
+    padding: 10px;
   }
 
   .preview-cards {
     grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .faq-question {
+    padding: 16px;
+    font-size: 14px;
+  }
+
+  .faq-item.open .faq-answer {
+    padding: 0 16px 16px;
   }
 
   .auth-tabs {

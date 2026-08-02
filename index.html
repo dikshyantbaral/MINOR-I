@@ -24,12 +24,30 @@
         <a href="#faq">FAQ</a>
       </div>
       <div class="nav-actions">
-        <button class="btn btn-ghost" onclick="openAuthModal('login')">Log in</button>
-        <button class="btn btn-primary" onclick="openAuthModal('signup')">Sign Up</button>
+        <button class="topbar-btn" onclick="toggleDarkMode()" title="Toggle Theme" style="display:inline-flex">
+          <i data-lucide="sun" style="width:20px;height:20px" id="theme-icon-sun"></i>
+          <i data-lucide="moon" style="width:20px;height:20px;display:none" id="theme-icon-moon"></i>
+        </button>
+        <button class="btn btn-ghost landing-login-btn" onclick="openAuthModal('login')">Log in</button>
+        <button class="btn btn-primary landing-signup-btn" onclick="openAuthModal('signup')">Sign Up</button>
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+          <i data-lucide="menu" style="width:22px;height:22px"></i>
+        </button>
       </div>
     </div>
   </div>
 </nav>
+
+<!-- Mobile Navigation Drawer & Backdrop -->
+<div class="mobile-drawer-overlay" id="mobile-drawer-overlay" onclick="toggleMobileMenu()"></div>
+<div class="mobile-menu-drawer" id="mobile-menu-drawer">
+  <a href="#features" onclick="toggleMobileMenu()">Features</a>
+  <a href="#faq" onclick="toggleMobileMenu()">FAQ</a>
+  <div style="display:flex;gap:12px;margin-top:12px">
+    <button class="btn btn-secondary w-full" onclick="toggleMobileMenu();openAuthModal('login')">Log in</button>
+    <button class="btn btn-primary w-full" onclick="toggleMobileMenu();openAuthModal('signup')">Sign Up</button>
+  </div>
+</div>
 
 <!-- Hero Section -->
 <section class="hero">
@@ -40,7 +58,7 @@
           <span class="badge"><i data-lucide="sparkles" style="width:14px;height:14px"></i> Intelligent Study Workspace</span>
         </div>
         <h1 class="hero-heading" style="margin-top:20px">Master Your Studies with Intelligent Planning</h1>
-        <p class="body-text hero-desc">Organize subjects, track daily tasks, stay in deep focus with customizable Pomodoro timers, all in one clean workspace.</p>
+        <p class="body-text hero-desc">Organize subjects, track daily tasks, stay in deep focus with customizable Pomodoro timers, and take smart notes — all in one clean workspace.</p>
         <div class="hero-buttons">
           <button class="btn btn-primary" onclick="openAuthModal('signup')">
             Get Started Free <i data-lucide="arrow-right" style="width:18px;height:18px"></i>
@@ -51,7 +69,7 @@
         </div>
       </div>
       <div>
-      
+        
       </div>
     </div>
   </div>
@@ -64,7 +82,7 @@
       <p class="label-text" style="color:var(--primary)">Core Capabilities</p>
       <h2 class="section-heading" style="margin-top:10px">Everything You Need to Ace Your Exams</h2>
     </div>
-    <div class="features-grid" style="grid-template-columns:repeat(4, 1fr)">
+    <div class="features-grid">
       <div class="card">
         <div class="feature-card-icon"><i data-lucide="layout-grid" style="width:22px;height:22px"></i></div>
         <h3 class="card-heading">Subject Planner</h3>
@@ -80,11 +98,7 @@
         <h3 class="card-heading">Focus Timer</h3>
         <p class="body-text" style="font-size:14px;margin-top:8px">Built-in customizable Pomodoro sessions keep you in deep concentration mode.</p>
       </div>
-      <div class="card">
-        <div class="feature-card-icon"><i data-lucide="sticky-note" style="width:22px;height:22px"></i></div>
-        <h3 class="card-heading">Notes Workspace</h3>
-        <p class="body-text" style="font-size:14px;margin-top:8px">Write and auto-save notes directly within your study workspace.</p>
-      </div>
+      
     </div>
   </div>
 </section>
@@ -125,7 +139,7 @@
 </footer>
 
 <!-- Auth Modal (Login / Sign Up) -->
-<div class="modal-overlay" id="auth-modal">
+<div class="modal-overlay" id="auth-modal" onclick="if(event.target===this) closeModal('auth-modal')">
   <div class="modal">
     <div class="modal-header">
       <h3 id="auth-modal-title">Sign In to Pragati</h3>
@@ -189,7 +203,15 @@
 <!-- Scripts -->
 <script src="js/storage.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/settings.js"></script>
 <script>
+  function toggleMobileMenu() {
+    const drawer = document.getElementById('mobile-menu-drawer');
+    const overlay = document.getElementById('mobile-drawer-overlay');
+    if (drawer) drawer.classList.toggle('open');
+    if (overlay) overlay.classList.toggle('open');
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     lucide.createIcons();
     checkSessionOnPageLoad(false);
