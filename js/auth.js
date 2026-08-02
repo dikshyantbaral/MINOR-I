@@ -87,7 +87,7 @@ function handleSignupSubmit(e) {
     password, // Stored in JSON
     createdAt: new Date().toISOString()
   };
-
+  
   db.push(newUser);
   saveUsersDB(db);
 

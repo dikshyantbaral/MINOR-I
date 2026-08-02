@@ -31,7 +31,7 @@
       <div class="sidebar-link" data-page="tasks" onclick="navigateTo('tasks')"><i data-lucide="check-square"></i> Tasks</div>
       <div class="sidebar-link" data-page="timer" onclick="navigateTo('timer')"><i data-lucide="timer"></i> Study Timer</div>
       <div class="sidebar-nav-label">Workspace</div>
-      <div class="sidebar-link" data-page="notes" onclick="navigateTo('notes')"><i data-lucide="sticky-note"></i> Notes</div>
+
       <div class="sidebar-link" data-page="settings" onclick="navigateTo('settings')"><i data-lucide="settings"></i> Settings</div>
     </nav>
     <div class="sidebar-footer">
@@ -127,7 +127,7 @@
     <!-- PAGE: TASKS -->
     <div class="page-content dashboard-page" id="page-tasks">
       <div class="page-header">
-        <h1>Tasks Kanban</h1>
+        <h1>Tasks </h1>
         <button class="btn btn-primary btn-sm" onclick="openModal('task-modal')"><i data-lucide="plus" style="width:16px;height:16px"></i> Add Task</button>
       </div>
 
@@ -192,23 +192,8 @@
       </div>
     </div>
 
-    <!-- PAGE: NOTES -->
-    <div class="page-content dashboard-page" id="page-notes">
-      <div class="page-header">
-        <h1>Study Notes</h1>
-        <button class="btn btn-primary btn-sm" onclick="createNewNote()"><i data-lucide="plus" style="width:16px;height:16px"></i> New Note</button>
-      </div>
-      <div class="notes-layout" id="notes-layout">
-        <div id="notes-list" style="display:flex;flex-direction:column;gap:10px"></div>
-        <div class="note-editor" id="note-editor">
-          <div class="note-editor-mobile-bar">
-            <button class="btn btn-secondary btn-sm" onclick="closeNoteEditor()"><i data-lucide="arrow-left" style="width:16px;height:16px"></i> Back to Notes List</button>
-          </div>
-          <input type="text" id="note-editor-title" placeholder="Note Title..." oninput="autoSaveNote()">
-          <textarea id="note-editor-content" placeholder="Type your note content here..." oninput="autoSaveNote()"></textarea>
-        </div>
-      </div>
-    </div>
+  
+    
 
     <!-- PAGE: SETTINGS -->
     <div class="page-content dashboard-page" id="page-settings">
