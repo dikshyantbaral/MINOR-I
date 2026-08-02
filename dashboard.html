@@ -30,9 +30,9 @@
       <div class="sidebar-link" data-page="subjects" onclick="navigateTo('subjects')"><i data-lucide="book-open"></i> Subjects</div>
       <div class="sidebar-link" data-page="tasks" onclick="navigateTo('tasks')"><i data-lucide="check-square"></i> Tasks</div>
       <div class="sidebar-link" data-page="timer" onclick="navigateTo('timer')"><i data-lucide="timer"></i> Study Timer</div>
-      <div class="sidebar-nav-label">Workspace</div>
+  
 
-      <div class="sidebar-link" data-page="settings" onclick="navigateTo('settings')"><i data-lucide="settings"></i> Settings</div>
+     
     </nav>
     <div class="sidebar-footer">
       <button class="btn btn-ghost w-full flex items-center gap-8" onclick="handleLogout()" style="justify-content:flex-start">
@@ -195,34 +195,7 @@
   
     
 
-    <!-- PAGE: SETTINGS -->
-    <div class="page-content dashboard-page" id="page-settings">
-      <div class="page-header"><h1>Account Settings</h1></div>
-      <div class="settings-grid">
-        <div class="chart-card">
-          <h3>User Profile</h3>
-          <div style="margin-top:20px" class="flex flex-col gap-16">
-            <div class="input-group">
-              <label>Full Name</label>
-              <input type="text" id="settings-name">
-            </div>
-            <div class="input-group">
-              <label>Email Address</label>
-              <input type="email" id="settings-email" disabled style="opacity:0.7;cursor:not-allowed">
-            </div>
-            <button class="btn btn-primary" onclick="saveProfileSettings()">Save Profile</button>
-          </div>
-        </div>
-        <div class="chart-card">
-          <h3>JSON Storage & Backup</h3>
-          <p class="body-text" style="font-size:14px;margin-top:10px">Export your account data as a JSON file backup, or manage your stored credentials.</p>
-          <div style="margin-top:20px" class="flex gap-16">
-            <button class="btn btn-secondary btn-sm" onclick="exportUserJSON()"><i data-lucide="download" style="width:16px;height:16px"></i> Export JSON Data</button>
-            <button class="btn btn-danger btn-sm" onclick="handleLogout()"><i data-lucide="log-out" style="width:16px;height:16px"></i> Log Out</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
   </div>
 </div>
