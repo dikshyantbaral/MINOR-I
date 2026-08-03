@@ -57,9 +57,9 @@
   --shadow-lg: 0 20px 60px rgba(0, 0, 0, .4);
 }
 
-/* ================================
+/* 
    2. Reset & Base
-   ================================ */
+    */
 *,
 *::before,
 *::after {
@@ -148,9 +148,9 @@ img {
   border-radius: 3px;
 }
 
-/* ================================
+/* 
    3. Typography & Layout
-   ================================ */
+   */
 .hero-heading {
   font-size: 64px;
   font-weight: 800;
@@ -253,9 +253,9 @@ img {
   position: relative;
 }
 
-/* ================================
+/*
    4. Component UI
-   ================================ */
+    */
 .btn {
   display: inline-flex;
   align-items: center;
